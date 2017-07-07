@@ -53,7 +53,7 @@ const getDataSeries = (m) => {
 }
 
 
-class PlotContainer extends React.Component {
+class TSNEPlotContainer extends React.Component {
 
     constructor(props) {
         super(props);
@@ -98,4 +98,4 @@ class PlotContainer extends React.Component {
     }
 }
 
-export default PlotContainer;
+export default TSNEPlotContainer;

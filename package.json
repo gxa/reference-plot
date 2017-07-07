@@ -2,14 +2,17 @@
   "name": "single-cell-tsne-plot",
   "version": "0.0.1",
   "description": "Reference plot based on Teichmann Lab's paper and Guy Emerton's code",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "babel src -d lib --ignore '**/*.less' --copy-files",
     "prepublish": "npm run build"
   },
   "author": "atlas-developers@ebi.ac.uk",
   "license": "Apache-2.0",
-  "repository": "github.com/gxa/atlas-heatmap",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gxa/reference-plot"
+  },
   "dependencies": {
     "lodash": "^4.17.2",
     "prop-types": "^15.5.10",
@@ -27,7 +30,6 @@
     "babel-preset-env": "^1.5.2",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.16",
-
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.4",
     "image-webpack-loader": "^1.6.3",
@@ -39,7 +41,6 @@
     "mocha-webpack": "^0.6.0",
     "request": "^2.75.0",
     "style-loader": "^0.13.0",
-
     "webpack": "^2.6.0",
     "webpack-dev-server": "^2.5.0",
     "react-hot-loader": "^3.0.0-beta.7",

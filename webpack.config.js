@@ -6,7 +6,7 @@ process.traceDeprecation = true;
 
 module.exports = {
     entry: {
-        tsne: ['whatwg-fetch','./index.js'],
+        tsne: ['whatwg-fetch','./src/index.js'],
         dependencies: ['prop-types', 'react', 'react-dom']
     },
 
