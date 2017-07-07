@@ -1,20 +1,10 @@
-"use strict";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import TSNEPlotContainer from './TSNEPlotContainer.jsx';
 
-//*------------------------------------------------------------------*
-
-const TSNEPlotContainer = require('./TSNEPlotContainer.jsx');
-
-
-exports.render = function(options) {
-
+export default function ({container}) {
     ReactDOM.render(
-        React.createElement(
-            TSNEPlotContainer,
-            {referenceDataSourceUrlTemplate: options.referenceDataSourceUrlTemplate}
-        ),
-        (typeof options.target === "string") ? document.getElementById(options.target) : options.target
-    );
+        <TSNEPlotContainer />,
+        typeof container === `string` ? document.getElementById(container) : container)
 };
