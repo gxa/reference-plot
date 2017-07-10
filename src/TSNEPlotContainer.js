@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 import ScatterPlot from './ScatterPlot.js';
 import _groupBy from 'lodash/groupBy';
-import {DropdownButton, MenuItem} from 'react-bootstrap'
 
 const referencePlotOptions = {
     "chart": {
@@ -63,29 +63,35 @@ class TSNEPlotContainer extends React.Component {
         }
     }
 
+    handleChange(e) {
+        this.setState({clustersChosen: e.target.value})
+    }
+
     render() {
+
+        const clusterOptions = Object.keys(require('./clusters.json')).sort()
+            .map((name, ix) => (
+                <option key={ix} value={name}>{name}</option>
+                ));
+
         return (
             <div>
                 <h5>
                     Clustering plot
                 </h5>
                 <div className="row">
-                    <DropdownButton title={"Clustering: " + this.state.clustersChosen} id="bg-nested-dropdown">
-                        {
-                            Object.keys(require('./clusters.json'))
-                                .sort()
-                                .map((name, ix) => (
-                                    <MenuItem key={ix}
-                                              onClick={() => this.setState({clustersChosen: name})}
-                                              eventKey={ix}>
-                                        {name}
-                                    </MenuItem>
-                                ))
-                        }
-                    </DropdownButton>
-                    <ScatterPlot dataset={getDataSeries(getSeriesMap(this.state.clustersChosen))}
-                                 options={referencePlotOptions}
-                    />
+                    <div className="small-12 medium-6 columns">
+                        <label>Clustering: {this.state.clustersChosen}</label>
+                        <select onChange={this.handleChange.bind(this)}>
+                            {clusterOptions}
+                        </select>
+
+                        <ScatterPlot dataset={getDataSeries(getSeriesMap(this.state.clustersChosen))}
+                                     options={referencePlotOptions}
+                        />
+                    </div>
+
+
                 </div>
                 <div className="row" style={{fontSize: "xs"}}>
                     <span> Clustering computed using </span>
@@ -97,5 +103,8 @@ class TSNEPlotContainer extends React.Component {
         )
     }
 }
+TSNEPlotContainer.propTypes = {
+    clustersData: PropTypes.string.isRequired
+};
 
 export default TSNEPlotContainer;
