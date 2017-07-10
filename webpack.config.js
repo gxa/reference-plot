@@ -2,11 +2,12 @@ var webpack = require('webpack');
 var path = require('path');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
-process.traceDeprecation = true;
+// If you get the message “loaderUtils.parseQuery() received a non-string value...” uncomment next line
+// process.traceDeprecation = true;
 
 module.exports = {
     entry: {
-        tsne: ['whatwg-fetch','./src/index.js'],
+        tsne: ['whatwg-fetch', './src/index.js'],
         dependencies: ['prop-types', 'react', 'react-dom']
     },
 
@@ -22,42 +23,23 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'dependencies',
             filename: 'vendorCommons.bundle.js',
-            minChunks: Infinity     // Explicit definition-based split. Don’t put shared modules between main and demo
-        }),                          // entries in vendor.bundle.js
+            minChunks: Infinity     // Explicit definition-based split, see dependencies entry
+        }),
+        // new webpack.HotModuleReplacementPlugin(),
+        // enable HMR globally, necessary along with devServer.hot: true (see below) for HMR to work as expected 🤔
+        // new webpack.NamedModulesPlugin()
+        // prints more readable module names in the browser console on HMR updates
     ],
 
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules:false
-                        }
-                    }
-                ]
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.less$/,
-                use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules:false
-                        }
-                    },
-                    {
-                        loader: 'less-loader'
-                    }
-                ]
+                test: /\.less$/i,
+                use: ['style-loader', 'css-loader', 'less-loader']
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
@@ -107,20 +89,17 @@ module.exports = {
                 ]
             },
             {
-                test: /\.jsx?$/,
-                // Place after node_modules packages owned by Expression Atlas to be transpiled, as they aren’t
-                // distributed pre-bundled or with a dist kind of folder
-                exclude: /node_modules\/(?!(expression-atlas|anatomogram|react-ebi-species))/,
-                use: [
-                    {
-                        loader: 'babel-loader'
-                    }
-                ]
+                test: /\.js$/i,
+                exclude: /node_modules\//,
+                use: 'babel-loader'
             }
         ]
     },
 
     devServer: {
-      port: 9000
+        // hot: true,      // CLI --hot is equivalent to this option, but it also enables the HMR plugin (see above)
+        // hotOnly: true,  // Won’t inject modules if there’s a compilation error (without this a full page reload is
+        // done after a successful build and we lose state)
+        port: 9000
     }
 };

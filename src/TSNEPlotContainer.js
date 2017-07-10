@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ScatterPlot from './ScatterPlot.jsx';
+import ScatterPlot from './ScatterPlot.js';
 import _groupBy from 'lodash/groupBy';
 import {DropdownButton, MenuItem} from 'react-bootstrap'
 
