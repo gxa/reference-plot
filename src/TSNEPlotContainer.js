@@ -33,7 +33,7 @@ const referencePlotOptions = {
 }
 
 const getSeriesMap = (clustersChosen) => (
-    new Map(require('./clusters.json')[clustersChosen] || [])
+    new Map(require('../lib/clusters.json')[clustersChosen] || [])
 )
 
 const colors = ['red', '#7cb5ec', '#90ed7d', '#f7a35c', '#8085e9',
@@ -59,7 +59,7 @@ class TSNEPlotContainer extends React.Component {
         super(props);
 
         this.state = {
-            clustersChosen: Object.keys(require('./clusters.json')).sort()[0]
+            clustersChosen: Object.keys(props.clustersData).sort()[0]
         }
     }
 
@@ -69,7 +69,7 @@ class TSNEPlotContainer extends React.Component {
 
     render() {
 
-        const clusterOptions = Object.keys(require('./clusters.json')).sort()
+        const clusterOptions = Object.keys(this.props.clustersData).sort()
             .map((name, ix) => (
                 <option key={ix} value={name}>{name}</option>
                 ));
@@ -104,7 +104,7 @@ class TSNEPlotContainer extends React.Component {
     }
 }
 TSNEPlotContainer.propTypes = {
-    clustersData: PropTypes.string.isRequired
+    clustersData: PropTypes.object
 };
 
 export default TSNEPlotContainer;
