@@ -69,6 +69,10 @@ class TSNEPlotContainer extends React.Component {
         this.setState({clustersChosen: e.target.value})
     }
 
+    componentDidMount() {
+        this.setState({clustersChosen: this.props.clusterId})
+    }
+
     render() {
         const clusterOptions = Object.keys(this.props.clustersData).sort()
             .map((name, ix) => (
