@@ -62,12 +62,12 @@ class TSNEPlotContainer extends React.Component {
             clustersChosen: props.clusterId,
         };
 
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(e) {
-        this.setState({clustersChosen: e.target.value})
-    }
+    // handleChange(e) {
+    //     this.setState({clustersChosen: e.target.value})
+    // }
 
     componentDidMount() {
         this.setState({clustersChosen: this.props.clusterId})
@@ -87,7 +87,7 @@ class TSNEPlotContainer extends React.Component {
                 <div className="row">
                     <div className="small-12 medium-6 columns">
                         <label>Clustering: {this.state.clustersChosen}</label>
-                        <select value={this.state.clustersChosen} onChange={this.handleChange}>
+                        <select value={this.state.clustersChosen} onChange={this.props.handleOptionsChange}>
                             {clusterOptions}
                         </select>
 
@@ -110,7 +110,8 @@ class TSNEPlotContainer extends React.Component {
 }
 TSNEPlotContainer.propTypes = {
     clustersData: PropTypes.object.isRequired,
-    clusterId: PropTypes.string.isRequired
+    clusterId: PropTypes.string.isRequired,
+    handleOptionsChange: PropTypes.func.isRequired
 };
 
 export default TSNEPlotContainer;
