@@ -5,24 +5,24 @@ import ScatterPlot from './ScatterPlot.js';
 import _groupBy from 'lodash/groupBy';
 
 const referencePlotOptions = {
-    "chart": {
+    chart: {
         width: 520,
-        "type": "scatter",
-        "zoomType": "xy",
-        "borderWidth": 2,
-        "borderColor": "#30426A"
+        type: "scatter",
+        zoomType: "xy",
+        borderWidth: 2,
+        borderColor: "#30426A"
     },
-    "xAxis": {
-        "title": {
-            "text": "Latent Variable 1"
+    xAxis: {
+        title: {
+            text: "Latent Variable 1"
         }
     },
-    "yAxis": {
-        "title": {
-            "text": "Latent Variable 2"
+    yAxis: {
+        title: {
+            text: "Latent Variable 2"
         }
     },
-    "title": {
+    title: {
         text: "Single Cells - t-SNE based on expression similarity"
     },
     tooltip: {
@@ -32,8 +32,8 @@ const referencePlotOptions = {
     }
 }
 
-const getSeriesMap = (clustersChosen) => (
-    new Map(require('../lib/clusters.json')[clustersChosen] || [])
+const getSeriesMap = (clustersData, clustersChosen) => (
+    new Map(clustersData[clustersChosen] || [])
 )
 
 const colors = ['red', '#7cb5ec', '#90ed7d', '#f7a35c', '#8085e9',
@@ -59,8 +59,10 @@ class TSNEPlotContainer extends React.Component {
         super(props);
 
         this.state = {
-            clustersChosen: Object.keys(props.clustersData).sort()[0]
-        }
+            clustersChosen: props.clusterId,
+        };
+
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(e) {
@@ -68,7 +70,6 @@ class TSNEPlotContainer extends React.Component {
     }
 
     render() {
-
         const clusterOptions = Object.keys(this.props.clustersData).sort()
             .map((name, ix) => (
                 <option key={ix} value={name}>{name}</option>
@@ -82,11 +83,11 @@ class TSNEPlotContainer extends React.Component {
                 <div className="row">
                     <div className="small-12 medium-6 columns">
                         <label>Clustering: {this.state.clustersChosen}</label>
-                        <select onChange={this.handleChange.bind(this)}>
+                        <select value={this.state.clustersChosen} onChange={this.handleChange}>
                             {clusterOptions}
                         </select>
 
-                        <ScatterPlot dataset={getDataSeries(getSeriesMap(this.state.clustersChosen))}
+                        <ScatterPlot dataset={getDataSeries(getSeriesMap(this.props.clustersData, this.state.clustersChosen))}
                                      options={referencePlotOptions}
                         />
                     </div>
@@ -104,7 +105,8 @@ class TSNEPlotContainer extends React.Component {
     }
 }
 TSNEPlotContainer.propTypes = {
-    clustersData: PropTypes.object
+    clustersData: PropTypes.object.isRequired,
+    clusterId: PropTypes.string.isRequired
 };
 
 export default TSNEPlotContainer;

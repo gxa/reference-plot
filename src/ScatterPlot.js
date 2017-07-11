@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 import ReactHighcharts from 'react-highcharts'
 import shallowCompare from "react-addons-shallow-compare";
 
-const Highcharts = ReactHighcharts.Highcharts;
-
-//*------------------------------------------------------------------*
-
 const baseOptions = {
     credits: {
         enabled: false
@@ -56,6 +52,7 @@ const baseOptions = {
 };
 
 class ScatterPlot extends React.Component {
+
     constructor(props) {
         super(props)
     }
