@@ -57,20 +57,6 @@ class TSNEPlotContainer extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            clustersChosen: props.clusterId,
-        };
-
-        // this.handleChange = this.handleChange.bind(this);
-    }
-
-    // handleChange(e) {
-    //     this.setState({clustersChosen: e.target.value})
-    // }
-
-    componentDidMount() {
-        this.setState({clustersChosen: this.props.clusterId})
     }
 
     render() {
@@ -86,12 +72,12 @@ class TSNEPlotContainer extends React.Component {
                 </h5>
                 <div className="row">
                     <div className="small-12 medium-6 columns">
-                        <label>Clustering: {this.state.clustersChosen}</label>
-                        <select value={this.state.clustersChosen} onChange={this.props.handleOptionsChange}>
+                        <label>Clustering: {this.props.clusterId}</label>
+                        <select value={this.props.clusterId} onChange={this.props.handleOptionsChange}>
                             {clusterOptions}
                         </select>
 
-                        <ScatterPlot dataset={getDataSeries(getSeriesMap(this.props.clustersData, this.state.clustersChosen))}
+                        <ScatterPlot dataset={getDataSeries(getSeriesMap(this.props.clustersData, this.props.clusterId))}
                                      options={referencePlotOptions}
                         />
                     </div>
