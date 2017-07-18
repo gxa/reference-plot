@@ -66,29 +66,17 @@ class TSNEPlotContainer extends React.Component {
                 ));
 
         return (
-            <div>
-                <h5>
-                    Clustering plot
-                </h5>
-                <div className="row">
-                    <div className="small-12 medium-6 columns">
-                        <label>Clustering: {this.props.clusterId}</label>
-                        <select value={this.props.clusterId} onChange={this.props.handleOptionsChange}>
-                            {clusterOptions}
-                        </select>
-
-                        <ScatterPlot dataset={getDataSeries(getSeriesMap(this.props.clustersData, this.props.clusterId))}
-                                     options={referencePlotOptions}
-                        />
-                    </div>
-
-
+            <div className="row">
+                <div className="columns small-5">
+                    <label>Clustering: {this.props.clusterId}</label>
+                    <select value={this.props.clusterId ? this.props.clusterId : ""} onChange={this.props.handleOptionsChange}>
+                        {clusterOptions}
+                    </select>
                 </div>
-                <div className="row" style={{fontSize: "xs"}}>
-                    <span> Clustering computed using </span>
-                    <a href="http://biorxiv.org/content/early/2016/01/13/036558">
-                        SC3
-                    </a>
+                <div className="columns small-12">
+                    <ScatterPlot dataset={getDataSeries(getSeriesMap(this.props.clustersData, this.props.clusterId))}
+                                 options={referencePlotOptions}
+                    />
                 </div>
             </div>
         )
@@ -96,7 +84,7 @@ class TSNEPlotContainer extends React.Component {
 }
 TSNEPlotContainer.propTypes = {
     clustersData: PropTypes.object.isRequired,
-    clusterId: PropTypes.string.isRequired,
+    clusterId: PropTypes.string,
     handleOptionsChange: PropTypes.func.isRequired
 };
 
