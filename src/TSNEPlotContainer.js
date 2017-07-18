@@ -65,16 +65,18 @@ class TSNEPlotContainer extends React.Component {
                 <option key={ix} value={name}>{name}</option>
                 ));
 
+        const clusterSelected = this.props.clusterId ? this.props.clusterId : Object.keys(this.props.clustersData)[0];
+
         return (
             <div className="row">
                 <div className="columns small-5">
                     <label>Clustering: {this.props.clusterId}</label>
-                    <select value={this.props.clusterId ? this.props.clusterId : ""} onChange={this.props.handleOptionsChange}>
+                    <select value={clusterSelected} onChange={this.props.handleOptionsChange}>
                         {clusterOptions}
                     </select>
                 </div>
                 <div className="columns small-12">
-                    <ScatterPlot dataset={getDataSeries(getSeriesMap(this.props.clustersData, this.props.clusterId))}
+                    <ScatterPlot dataset={getDataSeries(getSeriesMap(this.props.clustersData, clusterSelected))}
                                  options={referencePlotOptions}
                     />
                 </div>
