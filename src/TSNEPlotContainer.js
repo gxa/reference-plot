@@ -65,12 +65,12 @@ class TSNEPlotContainer extends React.Component {
                 <option key={ix} value={name}>{name}</option>
                 ));
 
-        const clusterSelected = this.props.clusterId ? this.props.clusterId : Object.keys(this.props.clustersData)[0];
+        const clusterSelected = this.props.k ? this.props.k : Object.keys(this.props.clustersData)[0];
 
         return (
             <div className="row">
                 <div className="columns small-5">
-                    <label>Clustering: {this.props.clusterId}</label>
+                    <label>Clustering: {this.props.k}</label>
                     <select value={clusterSelected} onChange={this.props.handleOptionsChange}>
                         {clusterOptions}
                     </select>
@@ -86,7 +86,8 @@ class TSNEPlotContainer extends React.Component {
 }
 TSNEPlotContainer.propTypes = {
     clustersData: PropTypes.object.isRequired,
-    clusterId: PropTypes.string,
+    k: PropTypes.string,
+    clusterId: PropTypes.arrayOf(PropTypes.number),
     handleOptionsChange: PropTypes.func.isRequired
 };
 
