@@ -1,6 +1,6 @@
 {
   "name": "single-cell-tsne-plot",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Reference plot based on Teichmann Lab's paper and Guy Emerton's code",
   "main": "lib/index.js",
   "scripts": {
