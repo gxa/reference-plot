@@ -55,8 +55,6 @@ class ScatterPlot extends React.Component {
 
     constructor(props) {
         super(props)
-
-        this.state = {clusterId: this.props.clusterId}
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -73,13 +71,17 @@ class ScatterPlot extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({clusterId: nextProps.clusterId});
-        this.highlightCluster(this.state.clusterId);
+        this.highlightCluster(nextProps.clusterId);
     }
 
     componentDidMount() {
-        this.setState({clusterId: this.props.clusterId});
-        this.highlightCluster(this.state.clusterId);
+        this.highlightCluster(this.props.clusterId);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.clusterId !== this.props.clusterId) {
+            this.highlightCluster(this.props.clusterId);
+        }
     }
 
     render() {
