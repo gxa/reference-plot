@@ -55,14 +55,16 @@ class ScatterPlot extends React.Component {
 
     constructor(props) {
         super(props)
+
+        this.state = {clusterId: this.props.clusterId}
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         return shallowCompare(this, nextProps, nextState);
     }
 
-    highlightCluster(item) {
-        for (let cluster of item.clusterId) {
+    highlightCluster(clusterId) {
+        for (let cluster of clusterId) {
             const c = this.refs.chart.chart.series[cluster].data;
             for (let i = 0; i < c.length; i++) {
                 this.refs.chart.chart.series[cluster].data[i].setState('hover');
@@ -71,11 +73,13 @@ class ScatterPlot extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.highlightCluster(nextProps);
+        this.setState({clusterId: nextProps.clusterId});
+        this.highlightCluster(this.state.clusterId);
     }
 
     componentDidMount() {
-        this.highlightCluster(this.props);
+        this.setState({clusterId: this.props.clusterId});
+        this.highlightCluster(this.state.clusterId);
     }
 
     render() {
