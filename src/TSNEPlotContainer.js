@@ -78,6 +78,7 @@ class TSNEPlotContainer extends React.Component {
                 <div className="columns small-12">
                     <ScatterPlot dataset={getDataSeries(getSeriesMap(this.props.clustersData, clusterSelected))}
                                  options={referencePlotOptions}
+                                 clusterId={this.props.clusterId}
                     />
                 </div>
             </div>

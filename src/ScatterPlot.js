@@ -61,6 +61,15 @@ class ScatterPlot extends React.Component {
         return shallowCompare(this, nextProps, nextState);
     }
 
+    componentDidMount() {
+        for (let cluster of this.props.clusterId) {
+            const c = this.refs.chart.chart.series[cluster].data;
+            for (let i = 0; i < c.length; i++) {
+                this.refs.chart.chart.series[cluster].data[i].setState('hover');
+            }
+        }
+    }
+
     render() {
         const config = Object.assign({},
             baseOptions,
