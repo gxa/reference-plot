@@ -97,7 +97,7 @@ class ScatterPlot extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        this.highlightCluster(prevProps.clusterId);
+        this.highlightCluster(this.props.clusterId);
     }
 
     render() {
