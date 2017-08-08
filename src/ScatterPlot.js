@@ -64,12 +64,6 @@ class ScatterPlot extends React.Component {
     }
 
     highlightCluster(clusterId) {
-        // for (let cluster of clusterId) {
-        //     const c = this.refs.chart.chart.series[cluster].data;
-        //     for (let i = 0; i < c.length; i++) {
-        //         this.refs.chart.chart.series[cluster].data[i].setState('hover');
-        //     }
-        // }
 
         if (clusterId.length) {
             this.refs.chart.chart.series.forEach((series, seriesIndex) => {
