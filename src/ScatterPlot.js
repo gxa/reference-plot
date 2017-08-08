@@ -80,7 +80,7 @@ class ScatterPlot extends React.Component {
                     } else {
                         const thisPointColor = Color(this.refs.chart.chart.series[seriesIndex].data[i].graphic.attr(`fill`))
                         // this.refs.chart.chart.series[seriesIndex].data[i].graphic.attr({fill: thisPointColor.desaturate(0.65).lighten(0.25).rgb().string()})
-                        this.refs.chart.chart.series[seriesIndex].data[i].graphic.attr({fill: thisPointColor.whiten(0.15).desaturate(0.50).lighten(0.25).rgb().string()})
+                        this.refs.chart.chart.series[seriesIndex].data[i].graphic.attr({fill: thisPointColor.grayscale().rgb().string()})
                     }
                 }
             })

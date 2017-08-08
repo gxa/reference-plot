@@ -87,7 +87,7 @@ class TSNEPlotContainer extends React.Component {
 }
 TSNEPlotContainer.propTypes = {
     clustersData: PropTypes.object.isRequired,
-    k: PropTypes.string,
+    k: PropTypes.number,
     clusterId: PropTypes.arrayOf(PropTypes.number),
     handleOptionsChange: PropTypes.func.isRequired
 };
