@@ -70,7 +70,7 @@ class TSNEPlotContainer extends React.Component {
         return (
             <div className="row">
                 <div className="columns small-5">
-                    <label>Clustering: {this.props.k}</label>
+                    <label>Clustering: </label>
                     <select value={clusterSelected} onChange={this.props.handleOptionsChange}>
                         {clusterOptions}
                     </select>
