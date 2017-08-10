@@ -65,7 +65,7 @@ class TSNEPlotContainer extends React.Component {
                 <option key={ix} value={name}>{name}</option>
                 ));
 
-        const clusterSelected = this.props.k ? this.props.k : Object.keys(this.props.clustersData)[0];
+        const clusterSelected = this.props.k ? this.props.k : Number.parseInt(Object.keys(this.props.clustersData)[0]);
 
         return (
             <div className="row">
